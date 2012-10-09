@@ -1,0 +1,33 @@
+﻿@model Distribution
+@{
+    ViewBag.Title = "Rain Simulation";
+}
+
+<h2>Rain Simulation</h2>
+
+<h3 style="color:Blue">Distribution</h3>
+<table class="newsTable">
+@for (int i = 0; i < Model.Ranks.Length; i++)
+{    
+    <tr>
+        <td style="background-color:Green">Rank @i</td>
+        @foreach (double item in Model.Ranks[i].Values)
+        {                
+            <td><span style="background-color:Gray">@item</span></td>
+        }
+    </tr>    
+}
+</table>
+
+<h3 style="color:Blue">Values in order of appearance</h3>
+<table>
+@foreach (var item in ViewBag.ValuesInOrder)
+{
+    <tr>
+        <td>
+           @item 
+        </td>
+    </tr>
+}
+</table>
+
