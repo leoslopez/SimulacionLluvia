@@ -45,14 +45,14 @@ namespace MonteCarloSimulation
             var distributionType = new Normal(MEAN, STD_DEV);
 
             int i = 0;            
-            while(i < 40)
+            while(i < 100)
             {                
-                double nextValue = distributionType.NextDouble();
-                ValuesInOrderOfAppearance.Add(nextValue);
+                double nextValue = distributionType.NextDouble();                
                 // TODO: it should not generate values lower than 0.
                 if (nextValue >= 0)
                 {
-                    i++;                    
+                    i++;
+                    ValuesInOrderOfAppearance.Add(nextValue);
                     MyDistribution.PutValueInRank(nextValue);
                 }
             }            

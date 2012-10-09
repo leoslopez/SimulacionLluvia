@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Web.Mvc;
 public class Distribution
 {
     public int RankCount { get; set; }
     public Rank[] Ranks { get; set; }
-    public MemoryStream Stream { get; set; }
+    public FileContentResult Stream { get; set; }
     
     public double Average 
     {
