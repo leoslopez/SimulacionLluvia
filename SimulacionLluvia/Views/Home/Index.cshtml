@@ -1,38 +1,112 @@
-﻿@model Distribution
-@{
-    ViewBag.Title = "Rain Simulation";
-}
+﻿<h1>Rain Simulation</h1>
 
-<h2>Rain Simulation</h2>
-
-<div style="width:100%; overflow-x:scroll; overflow-y:hidden">
-<table class="newsTable">
-@for (int i = 0; i < Model.Ranks.Length; i++)
-{    
-    <tr>
-        <td style="background-color:Green">Rank @i</td>
-        @foreach (double item in Model.Ranks[i].Values)
-        {                
-            <td><span style="background-color:Gray">@item</span></td>
-        }
-    </tr>    
-}
-</table>
-</div>
-
-<h3 style="color:Blue">Values in order of appearance</h3>
 <table>
-@foreach (var item in ViewBag.ValuesInOrder)
-{
     <tr>
         <td>
-           @item 
+            <input id="rdInputValues" type="radio" name="group1" value="inputValues" checked>
+            Ingresar Media y Desvio Standard
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <input id="rdInputFile" type="radio" name="group1" value="inputFile">
+            Importar archivo con distribucion y frecuencia acumulada
         </td>
     </tr>
-}
 </table>
 
-<div>
-    @Html.Partial("_Chart", (List<double>)ViewBag.ValuesInOrder);    
+<br />
+
+<div id="inputValuesDiv" style="background-color:#D0F5A9; width:300px; vertical-align:middle; background-color:#D0F5A9; border-width:1px; border-color:Gray; border-style:solid;" >
+
+<div style="border:1px solid Gray; background-color:Silver; margin:20px; font-family:Comic Sans MS; font-size:small">
+    <p>-> Formato de entrada para la simulacion:</p>
+    <p>- Valor de la media y la desviación estandar de la distribucion.</p>    
+    <p>(Considerarlo para cada mes: Enero, Febrero, etc.)</p>
+    <p>NO DEJAR VACIO LOS INPUTS</p>
+</div>
+
+    @using (Html.BeginForm("MeanDesvSimulation", "Simulation"))
+    {
+        <table>
+            <tr>
+                <td>
+                    <label>Media</label>
+                </td>
+                <td>
+                    <input name="mean" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Desvio</label>
+                </td>
+                <td>
+                    <input name="std_dev" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Cantidad de sucesos a seleccionar</label>
+                </td>
+                <td>
+                    <input name="numberOfEvents" type="text" />
+                </td>
+            </tr>        
+
+            <tr><td colspan="2"></td></tr>
+            <tr><td colspan="2"></td></tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Simular" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+<div id="inputFileDiv" style="display:none; vertical-align:middle; background-color:#D0F5A9; border-width:1px; border-color:Gray; border-style:solid; width:550px" >
+
+<div style="border:1px solid Gray; background-color:Silver; margin:20px; font-family:Comic Sans MS; font-size:small">
+    <p>-> Formato de entrada para la simulacion:</p>
+    <p>- Rango de valores con limite inferior y superior.</p>
+    <p>- Frecuencia acumulada para el rango.</p>
+    <p>(Debiera estar divido por meses en un excel; un sheet para Enero, para Febrero, etc.)</p>
+    <p>(Por ahora solo funciona con datos harcodeados usando la distribucion de Diciembre del caso de estudio que nos pasaron)</p>
+    <p>NO DEJAR VACIO LOS INPUTS</p>
+</div>
+
+@using (Html.BeginForm("InputFileSimulation", "Simulation"))
+{
+    <table>
+        <tr>
+            <td>
+                <label>Archivo con rangos, y probabilidad acumulada</label>
+            </td>
+            <td>                
+                <input id="importFile" type="file" />                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Cantidad de sucesos a seleccionar</label>
+            </td>
+            <td>
+                <input name="numberOfEvents" type="text" />
+            </td>
+        </tr>
+
+        <tr><td colspan="2"></td></tr>
+        <tr><td colspan="2"></td></tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Simular" />
+            </td>
+        </tr>
+    </table>
+}
 </div>
 

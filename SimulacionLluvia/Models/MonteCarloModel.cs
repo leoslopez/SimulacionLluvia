@@ -7,22 +7,25 @@ namespace MonteCarloSimulation
     /// Monte Carlo Simulation
     /// </summary>
     public class MonteCarloModel
-    {        
-        private readonly int _rankCount;        
-        private readonly Rank[] _ranks;
-
+    {                           
         public Distribution MyDistribution { get; set; }
         public List<double> ValuesInOrderOfAppearance = new List<double>();
 
-        private const double MEAN = 30.24;
-        private const double STD_DEV = 17.77;
+        private double _mean = 0.0;
+        private double _std_dev = 0.0;
 
+        public MonteCarloModel(int rankCount, Rank[] ranks, double mean, double std_dev)
+        {
+            _mean = mean;
+            _std_dev = std_dev;
+            MyDistribution = new Distribution();
+            MyDistribution.RankCount = rankCount;
+            MyDistribution.Ranks = ranks;
+            Run();
+        }
 
         public MonteCarloModel(int rankCount, Rank[] ranks)
-        {
-
-            _rankCount = rankCount;
-            _ranks = ranks;
+        {                        
             MyDistribution = new Distribution();
             MyDistribution.RankCount = rankCount;
             MyDistribution.Ranks = ranks;
@@ -34,7 +37,7 @@ namespace MonteCarloSimulation
         /// </summary>
         private void Run()
         {
-            var distributionType = new Normal(MEAN, STD_DEV);
+            var distributionType = new Normal(_mean, _std_dev);
 
             int i = 0;            
             while(i < 10000)
