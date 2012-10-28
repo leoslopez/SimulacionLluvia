@@ -8,8 +8,7 @@ namespace MonteCarloSimulation
     /// </summary>
     public class MonteCarloModel
     {        
-        private readonly int _rankCount;
-        private readonly double[] _limits;
+        private readonly int _rankCount;        
         private readonly Rank[] _ranks;
 
         public Distribution MyDistribution { get; set; }
@@ -19,14 +18,7 @@ namespace MonteCarloSimulation
         private const double STD_DEV = 17.77;
 
 
-        public MonteCarloModel(int rankCount, double[] limits)
-        {
-            _rankCount = rankCount;
-            _limits = limits;
-            Run();
-        }
-
-        public MonteCarloModel(int rankCount, Rank[] ranks, double[] limits)
+        public MonteCarloModel(int rankCount, Rank[] ranks)
         {
 
             _rankCount = rankCount;
@@ -45,7 +37,7 @@ namespace MonteCarloSimulation
             var distributionType = new Normal(MEAN, STD_DEV);
 
             int i = 0;            
-            while(i < 100)
+            while(i < 10000)
             {                
                 double nextValue = distributionType.NextDouble();                
                 // TODO: it should not generate values lower than 0.

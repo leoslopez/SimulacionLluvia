@@ -73,6 +73,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyMonteCarloModel.cs" />
     <Compile Include="Models\Distribution.cs" />
     <Compile Include="Models\HistogramchartHelper.cs" />
     <Compile Include="Models\MonteCarloChart.cs" />

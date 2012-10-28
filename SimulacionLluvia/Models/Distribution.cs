@@ -49,5 +49,23 @@ public class Distribution
         }
 
         return false;
-    }
+    }    
+
+    public double PutValueInRankUsingFrequency(double value)
+    {
+        double valueToReturn = 0.0;
+
+        for (int i = 0; i < RankCount; i++)
+        {
+            Rank currentRank = Ranks[i];
+            if (value <= currentRank.CumFrequency)
+            {
+                valueToReturn = currentRank.CenterValueOfRank;
+                currentRank.Values.Add(valueToReturn);
+                return valueToReturn;
+            }
+        }
+
+        return valueToReturn;
+    }    
 }
